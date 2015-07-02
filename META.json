@@ -57,5 +57,19 @@
       }
    },
    "release_status" : "unstable",
-   "version" : "0.01"
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/sojiro14/JSON-MergePatch/issues"
+      },
+      "homepage" : "https://github.com/sojiro14/JSON-MergePatch",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/sojiro14/JSON-MergePatch.git",
+         "web" : "https://github.com/sojiro14/JSON-MergePatch"
+      }
+   },
+   "version" : "0.01",
+   "x_contributors" : [
+      "taishi-hiraga <taishi.hiraga@dena.com>"
+   ]
 }
