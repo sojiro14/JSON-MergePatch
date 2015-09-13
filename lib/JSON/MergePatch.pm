@@ -3,10 +3,10 @@ use 5.008001;
 use strict;
 use warnings;
 
-our $VERSION = "0.01";
+our $VERSION = "0.02";
 
 use parent 'Exporter';
-use JSON qw/encode_json decode_json/;
+use JSON::MaybeXS qw/encode_json decode_json/;
 use List::MoreUtils qw/uniq/;
 
 our @EXPORT = qw/json_merge_patch json_merge_diff/;
@@ -23,7 +23,7 @@ sub patch {
             $target = +{};
         }
 
-        for my $key (keys $patch) {
+        for my $key (keys %$patch) {
             if (defined $patch->{$key}) {
                 $target->{$key} = __PACKAGE__->patch($target->{$key}, $patch->{$key}, {repeat => 1});
             }
@@ -68,7 +68,7 @@ sub diff {
 
     if (ref $decoded_source eq 'HASH') {
         if (ref $decoded_target eq 'HASH') {
-            for my $key (uniq (keys $decoded_target, keys $decoded_source)) {
+            for my $key (uniq (keys %$decoded_target, keys %$decoded_source)) {
                 $decoded_source->{$key} = __PACKAGE__->diff($decoded_source->{$key}, $decoded_target->{$key}, {repeat => 1});
 
                 if (exists $decoded_target->{$key} && exists $decoded_source->{$key}) {
