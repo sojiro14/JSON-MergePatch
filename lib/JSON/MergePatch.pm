@@ -74,7 +74,8 @@ sub diff {
                 if (exists $decoded_target->{$key} && exists $decoded_source->{$key}) {
                     if (
                         (!defined $decoded_target->{$key} && !defined $decoded_source->{$key}) ||
-                        (defined $decoded_target->{$key} && defined $decoded_source->{$key} && $decoded_target->{$key} eq $decoded_source->{$key})
+                        (defined $decoded_target->{$key} && defined $decoded_source->{$key} && $decoded_target->{$key} eq $decoded_source->{$key}) ||
+                        (defined $decoded_target->{$key} && defined $decoded_source->{$key} && ref $decoded_source->{$key} eq 'HASH' && !%{$decoded_source->{$key}} && ref $decoded_target->{$key} eq 'HASH')
                     ) {
                         delete $decoded_source->{$key};
                     }
