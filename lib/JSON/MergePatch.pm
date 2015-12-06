@@ -8,6 +8,7 @@ our $VERSION = "0.02";
 use parent 'Exporter';
 use JSON::MaybeXS qw/encode_json decode_json/;
 use List::MoreUtils qw/uniq/;
+use Test::Deep::NoTest;
 
 our @EXPORT = qw/json_merge_patch json_merge_diff/;
 
@@ -62,10 +63,6 @@ sub diff {
         }
     }
 
-    if (ref $decoded_source eq 'ARRAY') {
-        return $decoded_source;
-    }
-
     if (ref $decoded_source eq 'HASH') {
         if (ref $decoded_target eq 'HASH') {
             for my $key (uniq (keys %$decoded_target, keys %$decoded_source)) {
@@ -74,7 +71,8 @@ sub diff {
                 if (exists $decoded_target->{$key} && exists $decoded_source->{$key}) {
                     if (
                         (!defined $decoded_target->{$key} && !defined $decoded_source->{$key}) ||
-                        (defined $decoded_target->{$key} && defined $decoded_source->{$key} && $decoded_target->{$key} eq $decoded_source->{$key})
+                        (defined $decoded_target->{$key} && defined $decoded_source->{$key} && $decoded_target->{$key} eq $decoded_source->{$key}) ||
+                        (defined $decoded_target->{$key} && defined $decoded_source->{$key} && ref $decoded_source->{$key} eq 'ARRAY' && eq_deeply($decoded_target->{$key}, $decoded_source->{$key}))
                     ) {
                         delete $decoded_source->{$key};
                     }
