@@ -24,7 +24,9 @@ my $test_cases = +[
     +{ source => '{"a":{"bb":{}}}',          target => undef,                     expected => {'a'=>{'bb'=>{}}} },
     +{ source => '{"a":{"b":"b"},"c":"e"}',  target => '{"a":{"b":"b"},"c":"d"}', expected => {'c'=>'e'} },
     +{ source => '{"a":{},"c":"e"}',         target => '{"a":"b","c":"d"}',       expected => {'a'=>{},'c'=>'e'} },
-    +{ source => '{"a":{ "a":"a"},"c":"e"}', target => '{"a":"b","c":"d"}',       expected => {'a'=>{'a'=>'a'},'c'=>'e'} },
+    +{ source => '{"a":{},"c":"e"}',         target => '{"a":{"b":"c"},"c":"d"}', expected => {'a'=>{'b'=>undef},'c'=>'e'} },
+    +{ source => '{"a":{"a":"a"},"c":"e"}',  target => '{"a":"b","c":"d"}',       expected => {'a'=>{'a'=>'a'},'c'=>'e'} },
+    +{ source => '{"a":{"b":"b"},"c":"e"}',  target => '{"a":{"c":"c"},"c":"d"}', expected => {'a'=>{'b'=>'b','c'=>undef},'c'=>'e'} },
 ];
 
 for my $test_case (@$test_cases) {

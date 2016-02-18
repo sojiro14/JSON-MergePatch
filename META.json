@@ -70,6 +70,8 @@
    },
    "version" : "0.02",
    "x_contributors" : [
-      "taishi-hiraga <taishi.hiraga@dena.com>"
+      "taishi-hiraga <taishi.hiraga@dena.com>",
+      "Ivan Bessarabov <ivan@bessarabov.ru>",
+      "Taishi Hiraga <sojiro14@users.noreply.github.com>"
    ]
 }

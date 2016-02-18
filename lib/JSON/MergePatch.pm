@@ -62,30 +62,19 @@ sub diff {
         }
     }
 
-    if (ref $decoded_source eq 'ARRAY') {
-        return $decoded_source;
-    }
+    if (ref $decoded_source eq 'HASH' && ref $decoded_target eq 'HASH') {
+        for my $key (uniq (keys %$decoded_target, keys %$decoded_source)) {
+            $decoded_source->{$key} = __PACKAGE__->diff($decoded_source->{$key}, $decoded_target->{$key}, {repeat => 1});
 
-    if (ref $decoded_source eq 'HASH') {
-        if (ref $decoded_target eq 'HASH') {
-            for my $key (uniq (keys %$decoded_target, keys %$decoded_source)) {
-                $decoded_source->{$key} = __PACKAGE__->diff($decoded_source->{$key}, $decoded_target->{$key}, {repeat => 1});
-
-                if (exists $decoded_target->{$key} && exists $decoded_source->{$key}) {
-                    if (
-                        (!defined $decoded_target->{$key} && !defined $decoded_source->{$key}) ||
-                        (defined $decoded_target->{$key} && defined $decoded_source->{$key} && $decoded_target->{$key} eq $decoded_source->{$key}) ||
-                        (defined $decoded_target->{$key} && defined $decoded_source->{$key} && ref $decoded_source->{$key} eq 'HASH' && !%{$decoded_source->{$key}} && ref $decoded_target->{$key} eq 'HASH')
-                    ) {
-                        delete $decoded_source->{$key};
-                    }
+            if (exists $decoded_target->{$key} && exists $decoded_source->{$key}) {
+                if (
+                    (!defined $decoded_target->{$key} && !defined $decoded_source->{$key}) ||
+                    (defined $decoded_target->{$key} && defined $decoded_source->{$key} && $decoded_target->{$key} eq $decoded_source->{$key}) ||
+                    (defined $decoded_target->{$key} && defined $decoded_source->{$key} && ref $decoded_source->{$key} eq 'HASH' && !%{$decoded_source->{$key}} && ref $decoded_target->{$key} eq 'HASH')
+                ) {
+                    delete $decoded_source->{$key};
                 }
             }
-
-            return $decoded_source;
-        }
-        else {
-            return $decoded_source;
         }
     }
 
