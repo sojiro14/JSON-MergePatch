@@ -8,6 +8,7 @@ our $VERSION = "0.03";
 use parent 'Exporter';
 use JSON::MaybeXS qw/encode_json decode_json/;
 use List::MoreUtils qw/uniq/;
+use Test::Deep::NoTest;
 
 our @EXPORT = qw/json_merge_patch json_merge_diff/;
 
@@ -70,7 +71,8 @@ sub diff {
                 if (
                     (!defined $decoded_target->{$key} && !defined $decoded_source->{$key}) ||
                     (defined $decoded_target->{$key} && defined $decoded_source->{$key} && $decoded_target->{$key} eq $decoded_source->{$key}) ||
-                    (defined $decoded_target->{$key} && defined $decoded_source->{$key} && ref $decoded_source->{$key} eq 'HASH' && !%{$decoded_source->{$key}} && ref $decoded_target->{$key} eq 'HASH')
+                    (defined $decoded_target->{$key} && defined $decoded_source->{$key} && ref $decoded_source->{$key} eq 'HASH' && !%{$decoded_source->{$key}} && ref $decoded_target->{$key} eq 'HASH') ||
+                    (defined $decoded_target->{$key} && defined $decoded_source->{$key} && ref $decoded_source->{$key} eq 'ARRAY' && eq_deeply($decoded_target->{$key}, $decoded_source->{$key}))
                 ) {
                     delete $decoded_source->{$key};
                 }
