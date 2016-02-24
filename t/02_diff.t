@@ -27,6 +27,7 @@ my $test_cases = +[
     +{ source => '{"a":{},"c":"e"}',         target => '{"a":{"b":"c"},"c":"d"}', expected => {'a'=>{'b'=>undef},'c'=>'e'} },
     +{ source => '{"a":{"a":"a"},"c":"e"}',  target => '{"a":"b","c":"d"}',       expected => {'a'=>{'a'=>'a'},'c'=>'e'} },
     +{ source => '{"a":{"b":"b"},"c":"e"}',  target => '{"a":{"c":"c"},"c":"d"}', expected => {'a'=>{'b'=>'b','c'=>undef},'c'=>'e'} },
+    +{ source => '{"a":"c","arr":[1]}',      target => '{"a":"b","arr":[1]}',     expected => {'a'=>'c'} },
 ];
 
 for my $test_case (@$test_cases) {
