@@ -3,7 +3,7 @@ use 5.008001;
 use strict;
 use warnings;
 
-our $VERSION = "0.03";
+our $VERSION = "0.04";
 
 use parent 'Exporter';
 use JSON::MaybeXS qw/encode_json decode_json/;

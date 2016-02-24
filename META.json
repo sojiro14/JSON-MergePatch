@@ -69,10 +69,10 @@
          "web" : "https://github.com/sojiro14/JSON-MergePatch"
       }
    },
-   "version" : "0.03",
+   "version" : "0.04",
    "x_contributors" : [
+      "taishi-hiraga <taishi.hiraga@dena.com>",
       "Ivan Bessarabov <ivan@bessarabov.ru>",
-      "Taishi Hiraga <sojiro14@users.noreply.github.com>",
-      "taishi-hiraga <taishi.hiraga@dena.com>"
+      "Taishi Hiraga <sojiro14@users.noreply.github.com>"
    ]
 }

@@ -2,6 +2,10 @@ Revision history for Perl extension JSON-MergePatch
 
 {{$NEXT}}
 
+0.04 2016-02-24T22:29:01Z
+
+    - (bug fix) diff() :when array-refs are present in the hash values (thanks bessarabov)
+
 0.03 2016-02-18T20:39:55Z
 
     - (bug fix) diff() :when the same hash-refs are present in the hash values of source and target (thanks bessarabov)
